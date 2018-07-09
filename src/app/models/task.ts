@@ -1,2 +1,5 @@
-export class Task {
+export interface Task {
+  id?: string;
+  title?: string;
+  description?: string;
 }
