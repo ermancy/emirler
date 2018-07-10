@@ -14,7 +14,7 @@ export class TasksComponent implements OnInit {
   tasks: Task[];
   editState: boolean = false;
   taskToEdit: Task;
-
+  
   constructor(public taskService: TaskService) { }
 
   ngOnInit() {

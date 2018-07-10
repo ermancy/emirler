@@ -1,34 +1,37 @@
+<mat-card>
+<mat-card-title>Tasks</mat-card-title>
+<mat-form-field>
+  <input matInput placeholder="Filtreleme">
+</mat-form-field>
 <div *ngIf="tasks?.length > 0;else noTasks">
-  <ul *ngFor="let task of tasks" class="collection">
-    <li class="collection-item" (dblclick)="deleteTask($event, task)">
+  <mat-nav-list>
+  <mat-list-item *ngFor="let task of tasks">
+    <div (dblclick)="deleteTask($event, task)">
       <strong>{{ task.title }}</strong> : {{ task.description }}
       <a href="#" class="secondary-content">
-        <i (click)="deleteTask($event, task)" class="fa fa-trash"></i>
-        <i (click)="editTask($event, task)" class="fa fa-pencil"></i>
+        <i (click)="deleteTask($event, task)" class="fas fa-trash"></i>
+        <i (click)="editTask($event, task)" class="fas fa-pencil-alt"></i>
       </a>
       <div *ngIf="editState && taskToEdit.id === task.id">
         <form (ngSubmit)="updateTask(task)">
           <div class="row">
-            <div class="input-field col s6">
-              <input
-                type="text" name="title"
-                placeholder="Edit Title" [(ngModel)]="task.title">
-            </div>
-            <div class="input-field col s6">
-                <input
-                  type="text" name="description"
-                  placeholder="Edit Description" [(ngModel)]="task.description">
-            </div>
-            <input type="submit" class="btn" value="Update Task">
-            <button class="btn red" (click)="deleteTask($event, task)">Delete Task</button>
+            <mat-form-field>
+              <input matInput type="text" name="title" placeholder="Edit Title" [(ngModel)]="task.title">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="text" name="description" placeholder="Edit Description" [(ngModel)]="task.description">
+            </mat-form-field>
+            <button mat-raised-button type="submit" value="Update Task">Update Task</button>
+            <button mat-raised-button (click)="deleteTask($event, task)">Delete Task</button>
           </div>
-        </form>
+         </form>
       </div>
-
-    </li>
-  </ul>
+    </div>
+  </mat-list-item>
+  </mat-nav-list>
 </div>
 
 <ng-template #noTasks>
   <h5>There is not Tasks yet.</h5>
 </ng-template>
+</mat-card>
